@@ -140,7 +140,7 @@ public class RendererRocket extends Render implements IRenderFactory<EntityRocke
 							Minecraft.getMinecraft().getBlockRendererDispatcher().renderBlock(block, new BlockPos(xx, yy, zz), storage.world, buffer);
 						} 
 						catch (NullPointerException e) {
-							System.out.println(block.getBlock().getUnlocalizedName() + " cannot be rendered on rocket at " + entity.getPosition());
+							System.out.println(block.getBlock().getTranslationKey() + " cannot be rendered on rocket at " + entity.getPosition());
 						}
 						Tessellator.getInstance().draw();
 					}

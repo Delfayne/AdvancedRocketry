@@ -35,7 +35,7 @@ public class BlockSeat extends Block {
 
 	@Override
 	@Nonnull
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 	

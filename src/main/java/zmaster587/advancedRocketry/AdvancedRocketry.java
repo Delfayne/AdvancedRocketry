@@ -73,7 +73,6 @@ import zmaster587.advancedRocketry.event.CableTickHandler;
 import zmaster587.advancedRocketry.event.PlanetEventHandler;
 import zmaster587.advancedRocketry.event.WorldEvents;
 import zmaster587.advancedRocketry.integration.CompatibilityMgr;
-import zmaster587.advancedRocketry.integration.GalacticCraftHandler;
 import zmaster587.advancedRocketry.item.*;
 import zmaster587.advancedRocketry.item.components.ItemJetpack;
 import zmaster587.advancedRocketry.item.components.ItemPressureTank;
@@ -1081,12 +1080,12 @@ public class AdvancedRocketry {
 		AdvancedRocketryAPI.gravityManager = new GravityHandler();
 
 		// Compat stuff
-		if(Loader.isModLoaded("galacticraftcore") && zmaster587.advancedRocketry.api.ARConfiguration.getCurrentConfig().overrideGCAir) {
-			GalacticCraftHandler eventHandler = new GalacticCraftHandler();
-			MinecraftForge.EVENT_BUS.register(eventHandler);
-			if(event.getSide().isClient())
-				FMLCommonHandler.instance().bus().register(eventHandler);
-		}
+//		if(Loader.isModLoaded("galacticraftcore") && zmaster587.advancedRocketry.api.ARConfiguration.getCurrentConfig().overrideGCAir) {
+//			GalacticCraftHandler eventHandler = new GalacticCraftHandler();
+//			MinecraftForge.EVENT_BUS.register(eventHandler);
+//			if(event.getSide().isClient())
+//				FMLCommonHandler.instance().bus().register(eventHandler);
+//		}
 		CompatibilityMgr.isSpongeInstalled = Loader.isModLoaded("sponge");
 		// End compat stuff
 

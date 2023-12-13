@@ -17,7 +17,7 @@ public class ModelLoader implements ICustomModelLoader
 	// return true if our Model Loader accepts this ModelResourceLocation
 	@Override
 	public boolean accepts(ResourceLocation resourceLocation) {
-		return resourceLocation.getResourceDomain().equals("advancedrocketry")
+		return resourceLocation.getNamespace().equals("advancedrocketry")
 				&& resourceLocation.getResourcePath().contains("rocketmotor");
 	}
 

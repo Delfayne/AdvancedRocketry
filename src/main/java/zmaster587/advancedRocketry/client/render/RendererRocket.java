@@ -132,7 +132,7 @@ public class RendererRocket extends Render implements IRenderFactory<EntityRocke
 
 						//I'm not dealing with untextured blocks from chisel and bits today
 						//Just assume everything from C&B is a bit
-						if(block.getBlock().getRegistryName().getResourceDomain().equals("chiselsandbits"))
+						if(block.getBlock().getRegistryName().getNamespace().equals("chiselsandbits"))
 							continue;
 
 						buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);

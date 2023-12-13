@@ -80,7 +80,7 @@ public class BlockRocketFire extends Block {
 						int k1 = this.getNeighborEncouragement(worldIn, blockpos);
 
 						if (k1 > 0) {
-							int l1 = (k1 + 40 + worldIn.getDifficulty().getDifficultyId() * 7) / (i + 30);
+							int l1 = (k1 + 40 + worldIn.getDifficulty().getId() * 7) / (i + 30);
 
 							if (l1 > 0 && rand.nextInt(j1) <= l1 && (!worldIn.isRaining() || !canFireDie(worldIn, blockpos))) {
 								worldIn.setBlockState(blockpos, Blocks.FIRE.getDefaultState().withProperty(BlockFire.AGE, 2), 3);

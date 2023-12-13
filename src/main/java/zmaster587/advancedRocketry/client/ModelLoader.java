@@ -18,7 +18,7 @@ public class ModelLoader implements ICustomModelLoader
 	@Override
 	public boolean accepts(ResourceLocation resourceLocation) {
 		return resourceLocation.getNamespace().equals("advancedrocketry")
-				&& resourceLocation.getResourcePath().contains("rocketmotor");
+				&& resourceLocation.getPath().contains("rocketmotor");
 	}
 
 	// When called for our Block3DWeb's ModelResourceLocation, return our WebModel.
@@ -29,11 +29,11 @@ public class ModelLoader implements ICustomModelLoader
 			assert false : "loadModel expected " + SMART_MODEL_RESOURCE_LOCATION + " but found " + resourcePath;
 		}*/
 
-        if (resourceLocation.getResourcePath().contains("rocketmotor")) {
+        if (resourceLocation.getPath().contains("rocketmotor")) {
 			return new ModelRocket();
 		} else {
 			try {
-				return ModelLoaderRegistry.getModel(new ResourceLocation(resourceLocation.getResourcePath()));
+				return ModelLoaderRegistry.getModel(new ResourceLocation(resourceLocation.getPath()));
 			} catch (Exception e) {
 				return ModelLoaderRegistry.getMissingModel();
 			}// ModelLoaderRegistry.getMissingModel();

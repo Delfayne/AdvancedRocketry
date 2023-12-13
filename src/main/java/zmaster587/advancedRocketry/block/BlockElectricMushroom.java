@@ -59,9 +59,9 @@ public class BlockElectricMushroom extends BlockMushroom implements IGrowable {
 	}
 	
 	@Override
-	public void onBlockDestroyedByPlayer(World world, BlockPos pos,
+	public void onPlayerDestroy(World world, BlockPos pos,
 			IBlockState state) {
-		super.onBlockDestroyedByPlayer(world, pos, state);
+		super.onPlayerDestroy(world, pos, state);
 		
 		if(world.isRemote) {
 			FxSystemElectricArc.spawnArc(world, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, .3, 7);

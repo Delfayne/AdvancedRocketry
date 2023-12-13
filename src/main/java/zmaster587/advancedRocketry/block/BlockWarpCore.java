@@ -36,9 +36,9 @@ public class BlockWarpCore extends BlockMultiblockMachine {
 	}
 	
 	@Override
-	public void onBlockDestroyedByPlayer(World world, BlockPos pos,
+	public void onPlayerDestroy(World world, BlockPos pos,
 			IBlockState state) {
-		super.onBlockDestroyedByPlayer(world, pos, state);
+		super.onPlayerDestroy(world, pos, state);
 		
 		if(world.provider.getDimension() == ARConfiguration.getCurrentConfig().spaceDimId) {
 			ISpaceObject spaceObj = SpaceObjectManager.getSpaceManager().getSpaceStationFromBlockCoords(pos);

@@ -31,7 +31,7 @@ public class ItemJackHammer extends ItemTool {
 	}
 
 	@ParametersAreNonnullByDefault
-    public float getStrVsBlock(@Nonnull ItemStack stack, IBlockState state)
+    public float getDestroySpeed(@Nonnull ItemStack stack, IBlockState state)
     {
     	return  state.getMaterial() == Material.IRON || state.getMaterial() == Material.ROCK || state.getMaterial() == MaterialGeode.geode  ? this.efficiency : super.getDestroySpeed(stack, state);
     	   

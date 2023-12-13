@@ -21,7 +21,7 @@ public class ItemJackHammer extends ItemTool {
 	public ItemJackHammer(ToolMaterial toolMaterial) {
 		super(toolMaterial, items);
 		
-		efficiencyOnProperMaterial = 50f;
+		efficiency = 50f;
 	}
 	
 	@Override
@@ -33,7 +33,7 @@ public class ItemJackHammer extends ItemTool {
 	@ParametersAreNonnullByDefault
     public float getStrVsBlock(@Nonnull ItemStack stack, IBlockState state)
     {
-    	return  state.getMaterial() == Material.IRON || state.getMaterial() == Material.ROCK || state.getMaterial() == MaterialGeode.geode  ? this.efficiencyOnProperMaterial : super.getStrVsBlock(stack, state);
+    	return  state.getMaterial() == Material.IRON || state.getMaterial() == Material.ROCK || state.getMaterial() == MaterialGeode.geode  ? this.efficiency : super.getDestroySpeed(stack, state);
     	   
     }
     

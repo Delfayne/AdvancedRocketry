@@ -48,6 +48,7 @@ import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import zmaster487.advancedRocketry.advancedrocketry.Reference;
 import zmaster587.advancedRocketry.advancements.ARAdvancements;
 import zmaster587.advancedRocketry.api.*;
 import zmaster587.advancedRocketry.api.capability.CapabilitySpaceArmor;
@@ -139,8 +140,14 @@ import java.util.*;
 import java.util.Map.Entry;
 
 
-@Mod(modid="advancedrocketry")
+@Mod(
+		modid = Reference.MOD_ID,
+		name = Reference.NAME,
+		version = Reference.VERSION,
+		dependencies = AdvancedRocketry.DEPS)
 public class AdvancedRocketry {
+
+	public static final String DEPS = "after:libvulpes";
 
 	@SidedProxy(clientSide="zmaster587.advancedRocketry.client.ClientProxy", serverSide="zmaster587.advancedRocketry.common.CommonProxy")
 	public static CommonProxy proxy;
@@ -157,12 +164,12 @@ public class AdvancedRocketry {
 	public static final Logger logger = LogManager.getLogger(Constants.modId);
 	private static Configuration config;
 	private boolean resetFromXml;
-	
+
 	static  {
 		FluidRegistry.enableUniversalBucket(); // Must be called before preInit
 	}
 
-	public static MaterialRegistry materialRegistry = new MaterialRegistry(); 
+	public static MaterialRegistry materialRegistry = new MaterialRegistry();
 
 	public static HashMap<AllowedProducts, HashSet<String>> modProducts = new HashMap<>();
 
@@ -174,27 +181,27 @@ public class AdvancedRocketry {
 			return new ItemStack(AdvancedRocketryItems.itemSatelliteIdChip);
 		}
 	};
-	
+
 	//Biome registry.
 	@SubscribeEvent
 	public void register(RegistryEvent.Register<Biome> evt)
 	{
-	    System.out.println("REGISTERING BIOMES");
-	    //Biome properties
-        AdvancedRocketryBiomes.moonBiome = new BiomeGenMoon(new Biome.BiomeProperties("Regolith Highlands").setRainDisabled().setBaseHeight(1f).setHeightVariation(0.2f).setRainfall(0).setTemperature(0.3f));
-        AdvancedRocketryBiomes.alienForest = new BiomeGenAlienForest(new Biome.BiomeProperties("Alien Forest").setWaterColor(0x8888FF));
-        AdvancedRocketryBiomes.hotDryBiome = new BiomeGenHotDryRock(new Biome.BiomeProperties("Ferric Regolith Wasteland").setRainDisabled().setBaseHeight(1f).setHeightVariation(0.01f).setRainfall(0).setTemperature(0.9f));
-        AdvancedRocketryBiomes.spaceBiome = new BiomeGenSpace(new Biome.BiomeProperties("Space").setRainDisabled().setBaseHeight(-2f).setHeightVariation(0f).setTemperature(1f));
-        AdvancedRocketryBiomes.stormLandsBiome = new BiomeGenStormland(new Biome.BiomeProperties("Stormland").setBaseHeight(1f).setHeightVariation(0.1f).setRainfall(0.9f).setTemperature(0.9f));
-        AdvancedRocketryBiomes.crystalChasms = new BiomeGenCrystal(new Biome.BiomeProperties("Crystal Chasms").setHeightVariation(0.1f).setBaseHeight(1f).setRainfall(0.2f).setTemperature(0.1f));
-        AdvancedRocketryBiomes.swampDeepBiome = new BiomeGenDeepSwamp(new Biome.BiomeProperties("Deep Swamp").setBaseHeight(-0.1f).setHeightVariation(0.2f).setRainfall(0.9f).setTemperature(0.9f).setWaterColor(14745518));
-        AdvancedRocketryBiomes.marsh = new BiomeGenMarsh(new Biome.BiomeProperties("Marsh").setBaseHeight(-0.4f).setHeightVariation(0f));
-        AdvancedRocketryBiomes.oceanSpires = new BiomeGenOceanSpires(new Biome.BiomeProperties("Ocean Spires").setBaseHeight(-0.5f).setHeightVariation(0f));
-        AdvancedRocketryBiomes.moonBiomeDark = new BiomeGenMoonDark(new Biome.BiomeProperties("Regolith Lowlands").setRainDisabled().setBaseHeight(0.5f).setHeightVariation(0.01f).setRainfall(0).setTemperature(0.3f));
-        AdvancedRocketryBiomes.volcanic = new BiomeGenVolcanic(new Biome.BiomeProperties("Volcanic").setRainDisabled().setBaseHeight(0f).setHeightVariation(0.9f).setRainfall(0).setTemperature(1.0f));
-        AdvancedRocketryBiomes.volcanicBarren = new BiomeGenBarrenVolcanic(new Biome.BiomeProperties("Volcanic Lowlands").setRainDisabled().setBaseHeight(0f).setHeightVariation(0.9f).setRainfall(0).setTemperature(1.0f));
+		System.out.println("REGISTERING BIOMES");
+		//Biome properties
+		AdvancedRocketryBiomes.moonBiome = new BiomeGenMoon(new Biome.BiomeProperties("Regolith Highlands").setRainDisabled().setBaseHeight(1f).setHeightVariation(0.2f).setRainfall(0).setTemperature(0.3f));
+		AdvancedRocketryBiomes.alienForest = new BiomeGenAlienForest(new Biome.BiomeProperties("Alien Forest").setWaterColor(0x8888FF));
+		AdvancedRocketryBiomes.hotDryBiome = new BiomeGenHotDryRock(new Biome.BiomeProperties("Ferric Regolith Wasteland").setRainDisabled().setBaseHeight(1f).setHeightVariation(0.01f).setRainfall(0).setTemperature(0.9f));
+		AdvancedRocketryBiomes.spaceBiome = new BiomeGenSpace(new Biome.BiomeProperties("Space").setRainDisabled().setBaseHeight(-2f).setHeightVariation(0f).setTemperature(1f));
+		AdvancedRocketryBiomes.stormLandsBiome = new BiomeGenStormland(new Biome.BiomeProperties("Stormland").setBaseHeight(1f).setHeightVariation(0.1f).setRainfall(0.9f).setTemperature(0.9f));
+		AdvancedRocketryBiomes.crystalChasms = new BiomeGenCrystal(new Biome.BiomeProperties("Crystal Chasms").setHeightVariation(0.1f).setBaseHeight(1f).setRainfall(0.2f).setTemperature(0.1f));
+		AdvancedRocketryBiomes.swampDeepBiome = new BiomeGenDeepSwamp(new Biome.BiomeProperties("Deep Swamp").setBaseHeight(-0.1f).setHeightVariation(0.2f).setRainfall(0.9f).setTemperature(0.9f).setWaterColor(14745518));
+		AdvancedRocketryBiomes.marsh = new BiomeGenMarsh(new Biome.BiomeProperties("Marsh").setBaseHeight(-0.4f).setHeightVariation(0f));
+		AdvancedRocketryBiomes.oceanSpires = new BiomeGenOceanSpires(new Biome.BiomeProperties("Ocean Spires").setBaseHeight(-0.5f).setHeightVariation(0f));
+		AdvancedRocketryBiomes.moonBiomeDark = new BiomeGenMoonDark(new Biome.BiomeProperties("Regolith Lowlands").setRainDisabled().setBaseHeight(0.5f).setHeightVariation(0.01f).setRainfall(0).setTemperature(0.3f));
+		AdvancedRocketryBiomes.volcanic = new BiomeGenVolcanic(new Biome.BiomeProperties("Volcanic").setRainDisabled().setBaseHeight(0f).setHeightVariation(0.9f).setRainfall(0).setTemperature(1.0f));
+		AdvancedRocketryBiomes.volcanicBarren = new BiomeGenBarrenVolcanic(new Biome.BiomeProperties("Volcanic Lowlands").setRainDisabled().setBaseHeight(0f).setHeightVariation(0.9f).setRainfall(0).setTemperature(1.0f));
 
-        //Biome registry names outside of constructor
+		//Biome registry names outside of constructor
 		AdvancedRocketryBiomes.moonBiome.setRegistryName(Constants.modId, "moon");
 		AdvancedRocketryBiomes.alienForest.setRegistryName(Constants.modId, "alien_forest");
 		AdvancedRocketryBiomes.hotDryBiome.setRegistryName(Constants.modId, "hotdryrock");
@@ -210,67 +217,67 @@ public class AdvancedRocketry {
 
 		//Actual registry
 		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.moonBiome, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.alienForest, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.hotDryBiome, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.spaceBiome, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.stormLandsBiome, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.crystalChasms, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.swampDeepBiome, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.marsh, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.oceanSpires, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.moonBiomeDark, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.volcanic, evt.getRegistry());
-        AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.volcanicBarren, evt.getRegistry());
-        
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.moonBiome, 
-        		BiomeDictionary.Type.WASTELAND,
-        		BiomeDictionary.Type.DRY,
-        		BiomeDictionary.Type.COLD
-        		);
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.moonBiomeDark, 
-        		BiomeDictionary.Type.WASTELAND,
-        		BiomeDictionary.Type.DRY,
-        		BiomeDictionary.Type.COLD
-        		);
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.alienForest, 
-        		BiomeDictionary.Type.MAGICAL,
-        		BiomeDictionary.Type.FOREST
-        		);
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.hotDryBiome, 
-        		BiomeDictionary.Type.WASTELAND,
-        		BiomeDictionary.Type.DRY,
-        		BiomeDictionary.Type.HOT
-        		);
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.volcanic, 
-        		BiomeDictionary.Type.WASTELAND,
-        		BiomeDictionary.Type.DRY,
-        		BiomeDictionary.Type.HOT,
-        		BiomeDictionary.Type.MOUNTAIN
-        		);
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.volcanicBarren, 
-        		BiomeDictionary.Type.WASTELAND,
-        		BiomeDictionary.Type.DRY,
-        		BiomeDictionary.Type.HOT,
-        		BiomeDictionary.Type.MOUNTAIN
-        		);
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.spaceBiome, BiomeDictionary.Type.VOID);
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.stormLandsBiome, 
-        		BiomeDictionary.Type.WASTELAND,
-        		BiomeDictionary.Type.WET,
-        		BiomeDictionary.Type.HOT
-        		);
-        
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.swampDeepBiome,
-        		BiomeDictionary.Type.WET,
-        		BiomeDictionary.Type.HOT
-        		);
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.marsh,
-        		BiomeDictionary.Type.WET,
-        		BiomeDictionary.Type.HOT
-        		);
-        BiomeDictionary.addTypes(AdvancedRocketryBiomes.oceanSpires,
-        		BiomeDictionary.Type.OCEAN
-        		);
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.alienForest, evt.getRegistry());
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.hotDryBiome, evt.getRegistry());
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.spaceBiome, evt.getRegistry());
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.stormLandsBiome, evt.getRegistry());
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.crystalChasms, evt.getRegistry());
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.swampDeepBiome, evt.getRegistry());
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.marsh, evt.getRegistry());
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.oceanSpires, evt.getRegistry());
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.moonBiomeDark, evt.getRegistry());
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.volcanic, evt.getRegistry());
+		AdvancedRocketryBiomes.instance.registerBiome(AdvancedRocketryBiomes.volcanicBarren, evt.getRegistry());
+
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.moonBiome,
+				BiomeDictionary.Type.WASTELAND,
+				BiomeDictionary.Type.DRY,
+				BiomeDictionary.Type.COLD
+				);
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.moonBiomeDark,
+				BiomeDictionary.Type.WASTELAND,
+				BiomeDictionary.Type.DRY,
+				BiomeDictionary.Type.COLD
+				);
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.alienForest,
+				BiomeDictionary.Type.MAGICAL,
+				BiomeDictionary.Type.FOREST
+				);
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.hotDryBiome,
+				BiomeDictionary.Type.WASTELAND,
+				BiomeDictionary.Type.DRY,
+				BiomeDictionary.Type.HOT
+				);
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.volcanic,
+				BiomeDictionary.Type.WASTELAND,
+				BiomeDictionary.Type.DRY,
+				BiomeDictionary.Type.HOT,
+				BiomeDictionary.Type.MOUNTAIN
+				);
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.volcanicBarren,
+				BiomeDictionary.Type.WASTELAND,
+				BiomeDictionary.Type.DRY,
+				BiomeDictionary.Type.HOT,
+				BiomeDictionary.Type.MOUNTAIN
+				);
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.spaceBiome, BiomeDictionary.Type.VOID);
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.stormLandsBiome,
+				BiomeDictionary.Type.WASTELAND,
+				BiomeDictionary.Type.WET,
+				BiomeDictionary.Type.HOT
+				);
+
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.swampDeepBiome,
+				BiomeDictionary.Type.WET,
+				BiomeDictionary.Type.HOT
+				);
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.marsh,
+				BiomeDictionary.Type.WET,
+				BiomeDictionary.Type.HOT
+				);
+		BiomeDictionary.addTypes(AdvancedRocketryBiomes.oceanSpires,
+				BiomeDictionary.Type.OCEAN
+				);
 		BiomeDictionary.addTypes(AdvancedRocketryBiomes.crystalChasms,
 				BiomeDictionary.Type.SNOWY,
 				BiomeDictionary.Type.WASTELAND
@@ -295,7 +302,7 @@ public class AdvancedRocketry {
 		config.load();
 		ARConfiguration.loadPreInit();
 		resetFromXml = config.getBoolean("resetPlanetsFromXML", Configuration.CATEGORY_GENERAL, false, "setting this to true will force AR to read from the XML file in the config/advRocketry instead of the local data, intended for use pack developers to ensure updates are pushed through");
-		
+
 		//Load client and UI positioning stuff
 		proxy.loadUILayout(config);
 
@@ -321,8 +328,8 @@ public class AdvancedRocketry {
 		PacketHandler.INSTANCE.addDiscriminator(PacketInvalidLocationNotify.class);
 		PacketHandler.INSTANCE.addDiscriminator(PacketConfigSync.class);
 		PacketHandler.INSTANCE.addDiscriminator(PacketFluidParticle.class);
-		
-		
+
+
 		//if(zmaster587.advancedRocketry.api.Configuration.allowMakingItemsForOtherMods)
 		MinecraftForge.EVENT_BUS.register(this);
 
@@ -349,7 +356,7 @@ public class AdvancedRocketry {
 		EntityRegistry.registerModEntity(new ResourceLocation(Constants.modId, "ARStarUIButton"), EntityUIStar.class, "ARStarUIButton", 7, this, 64, 20, false);
 		EntityRegistry.registerModEntity(new ResourceLocation(Constants.modId, "ARSpaceElevatorCapsule"),EntityElevatorCapsule.class, "ARSpaceElevatorCapsule", 8, this, 64, 20, true);
 		EntityRegistry.registerModEntity(new ResourceLocation(Constants.modId, "ARHoverCraft") , EntityHoverCraft.class, "hovercraft", 9, this, 64, 3, true);
-		
+
 		//TileEntity Registration ---------------------------------------------------------------------------------------------
 		GameRegistry.registerTileEntity(TileRocketAssemblingMachine.class, "ARrocketBuilder");
 		GameRegistry.registerTileEntity(TileWarpCore.class, "ARwarpCore");
@@ -414,7 +421,7 @@ public class AdvancedRocketry {
 		GameRegistry.registerTileEntity(TileCentrifuge.class, new ResourceLocation(Constants.modId, "ARCentrifuge"));
 		GameRegistry.registerTileEntity(TilePrecisionLaserEtcher.class, new ResourceLocation(Constants.modId, "ARPrecisionLaserEtcher"));
 		GameRegistry.registerTileEntity(TileSolarArray.class, new ResourceLocation(Constants.modId, "ARSolarArray"));
-		
+
 		if(zmaster587.advancedRocketry.api.ARConfiguration.getCurrentConfig().enableGravityController)
 			GameRegistry.registerTileEntity(TileAreaGravityController.class, "ARGravityMachine");
 
@@ -433,7 +440,7 @@ public class AdvancedRocketry {
 		LibVulpes.registerRecipeHandler(TilePrecisionLaserEtcher.class, event.getModConfigurationDirectory().getAbsolutePath() + "/" + zmaster587.advancedRocketry.api.ARConfiguration.configFolder + "/PrecisionLaserEtcher.xml");
 
 
-		
+
 		//AUDIO
 
 		//MOD-SPECIFIC ENTRIES --------------------------------------------------------------------------------------------------------------------------
@@ -446,20 +453,20 @@ public class AdvancedRocketry {
 
 		//Register item/block crap
 		proxy.preinit();
-		
-        //Register machines
-        machineRecipes.registerMachine(TileElectrolyser.class);
-        machineRecipes.registerMachine(TileCuttingMachine.class);
-        machineRecipes.registerMachine(TileLathe.class);
-        machineRecipes.registerMachine(TilePrecisionAssembler.class);
-        machineRecipes.registerMachine(TileElectricArcFurnace.class);
-        machineRecipes.registerMachine(TileChemicalReactor.class);
-        machineRecipes.registerMachine(TileRollingMachine.class);
-        machineRecipes.registerMachine(TileCrystallizer.class);
-        machineRecipes.registerMachine(TileCentrifuge.class);
+
+		//Register machines
+		machineRecipes.registerMachine(TileElectrolyser.class);
+		machineRecipes.registerMachine(TileCuttingMachine.class);
+		machineRecipes.registerMachine(TileLathe.class);
+		machineRecipes.registerMachine(TilePrecisionAssembler.class);
+		machineRecipes.registerMachine(TileElectricArcFurnace.class);
+		machineRecipes.registerMachine(TileChemicalReactor.class);
+		machineRecipes.registerMachine(TileRollingMachine.class);
+		machineRecipes.registerMachine(TileCrystallizer.class);
+		machineRecipes.registerMachine(TileCentrifuge.class);
 		machineRecipes.registerMachine(TilePrecisionLaserEtcher.class);
 	}
-	
+
 	@SubscribeEvent(priority=EventPriority.HIGH)
 	public void registerEnchants(RegistryEvent.Register<Enchantment> evt)
 	{
@@ -468,9 +475,9 @@ public class AdvancedRocketry {
 		AdvancedRocketryAPI.enchantmentSpaceProtection.setRegistryName(new ResourceLocation("advancedrocketry:spacebreathing"));
 		evt.getRegistry().register(AdvancedRocketryAPI.enchantmentSpaceProtection);
 	}
-	
+
 	@SubscribeEvent(priority=EventPriority.HIGH)
-    public void registerItems(RegistryEvent.Register<Item> evt)
+	public void registerItems(RegistryEvent.Register<Item> evt)
 	{
 		//Items -------------------------------------------------------------------------------------
 		AdvancedRocketryItems.itemWafer = new ItemIngredient(1).setTranslationKey("advancedrocketry:wafer").setCreativeTab(tabAdvRocketry);
@@ -581,20 +588,20 @@ public class AdvancedRocketry {
 
 
 
-		
-        OreDictionary.registerOre("waferSilicon", new ItemStack(AdvancedRocketryItems.itemWafer,1,0));
-        OreDictionary.registerOre("ingotCarbon", new ItemStack(AdvancedRocketryItems.itemMisc, 1, 1));
-        OreDictionary.registerOre("itemLens", AdvancedRocketryItems.itemLens);
+
+		OreDictionary.registerOre("waferSilicon", new ItemStack(AdvancedRocketryItems.itemWafer,1,0));
+		OreDictionary.registerOre("ingotCarbon", new ItemStack(AdvancedRocketryItems.itemMisc, 1, 1));
+		OreDictionary.registerOre("itemLens", AdvancedRocketryItems.itemLens);
 		OreDictionary.registerOre("lensPrecisionLaserEtcher", AdvancedRocketryItems.itemLens);
-        OreDictionary.registerOre("itemSilicon", MaterialRegistry.getItemStackFromMaterialAndType("Silicon", AllowedProducts.getProductByName("INGOT")));
-        OreDictionary.registerOre("dustThermite", new ItemStack(AdvancedRocketryItems.itemThermite));
-        OreDictionary.registerOre("slab", new ItemStack(Blocks.STONE_SLAB));
+		OreDictionary.registerOre("itemSilicon", MaterialRegistry.getItemStackFromMaterialAndType("Silicon", AllowedProducts.getProductByName("INGOT")));
+		OreDictionary.registerOre("dustThermite", new ItemStack(AdvancedRocketryItems.itemThermite));
+		OreDictionary.registerOre("slab", new ItemStack(Blocks.STONE_SLAB));
 		OreDictionary.registerOre("blockWarpCoreCore", new ItemStack(Blocks.GOLD_BLOCK));
 		OreDictionary.registerOre("blockWarpCoreRim", MaterialRegistry.getMaterialFromName("Titanium").getProduct(AllowedProducts.getProductByName("BLOCK")));
 	}
-	
+
 	@SubscribeEvent(priority=EventPriority.HIGH)
-    public void registerBlocks(RegistryEvent.Register<Block> evt)
+	public void registerBlocks(RegistryEvent.Register<Block> evt)
 	{
 		//Blocks -------------------------------------------------------------------------------------
 		//Machines
@@ -891,21 +898,21 @@ public class AdvancedRocketry {
 		LibVulpesBlocks.registerBlock(AdvancedRocketryBlocks.blockEnrichedLavaFluid.setRegistryName("enrichedLavaFluid"), null, false);
 
 
-		
+
 		//Register Allowed Products
 		materialRegistry.registerMaterial(new zmaster587.libVulpes.api.material.Material("TitaniumAluminide", "pickaxe", 1, 0xaec2de, AllowedProducts.getProductByName("PLATE").getFlagValue() | AllowedProducts.getProductByName("INGOT").getFlagValue() | AllowedProducts.getProductByName("NUGGET").getFlagValue() | AllowedProducts.getProductByName("DUST").getFlagValue() | AllowedProducts.getProductByName("STICK").getFlagValue() | AllowedProducts.getProductByName("BLOCK").getFlagValue() | AllowedProducts.getProductByName("GEAR").getFlagValue() | AllowedProducts.getProductByName("SHEET").getFlagValue(), false));
 		materialRegistry.registerMaterial(new zmaster587.libVulpes.api.material.Material("TitaniumIridium", "pickaxe", 1, 0xd7dfe4, AllowedProducts.getProductByName("PLATE").getFlagValue() | AllowedProducts.getProductByName("INGOT").getFlagValue() | AllowedProducts.getProductByName("NUGGET").getFlagValue() | AllowedProducts.getProductByName("DUST").getFlagValue() | AllowedProducts.getProductByName("STICK").getFlagValue() | AllowedProducts.getProductByName("BLOCK").getFlagValue() | AllowedProducts.getProductByName("GEAR").getFlagValue() | AllowedProducts.getProductByName("SHEET").getFlagValue(), false));
 
 		materialRegistry.registerOres(LibVulpes.tabLibVulpesOres);
-		
-        //OreDict stuff
-        OreDictionary.registerOre("turfMoon", new ItemStack(AdvancedRocketryBlocks.blockMoonTurf));
-        OreDictionary.registerOre("turfMoon", new ItemStack(AdvancedRocketryBlocks.blockMoonTurfDark));
-        OreDictionary.registerOre("logWood", new ItemStack(AdvancedRocketryBlocks.blockLightwoodWood));
-        OreDictionary.registerOre("plankWood", new ItemStack(AdvancedRocketryBlocks.blockLightwoodPlanks));
-        OreDictionary.registerOre("treeLeaves", new ItemStack(AdvancedRocketryBlocks.sblockLightwoodLeaves));
-        OreDictionary.registerOre("treeSapling", new ItemStack(AdvancedRocketryBlocks.blockLightwoodSapling));
-        OreDictionary.registerOre("concrete", new ItemStack(AdvancedRocketryBlocks.blockConcrete));
+
+		//OreDict stuff
+		OreDictionary.registerOre("turfMoon", new ItemStack(AdvancedRocketryBlocks.blockMoonTurf));
+		OreDictionary.registerOre("turfMoon", new ItemStack(AdvancedRocketryBlocks.blockMoonTurfDark));
+		OreDictionary.registerOre("logWood", new ItemStack(AdvancedRocketryBlocks.blockLightwoodWood));
+		OreDictionary.registerOre("plankWood", new ItemStack(AdvancedRocketryBlocks.blockLightwoodPlanks));
+		OreDictionary.registerOre("treeLeaves", new ItemStack(AdvancedRocketryBlocks.sblockLightwoodLeaves));
+		OreDictionary.registerOre("treeSapling", new ItemStack(AdvancedRocketryBlocks.blockLightwoodSapling));
+		OreDictionary.registerOre("concrete", new ItemStack(AdvancedRocketryBlocks.blockConcrete));
 		OreDictionary.registerOre("casingCentrifuge", new ItemStack(LibVulpesBlocks.blockAdvStructureBlock));
 	}
 
@@ -915,15 +922,15 @@ public class AdvancedRocketry {
 		proxy.preInitItems();
 		proxy.preInitBlocks();
 	}
-	
-    @SubscribeEvent
-    public void registerRecipes(RegistryEvent<IRecipe> evt)
-    {
-        GameRegistry.addSmelting(MaterialRegistry.getMaterialFromName("Dilithium").getProduct(AllowedProducts.getProductByName("ORE")), MaterialRegistry.getMaterialFromName("Dilithium").getProduct(AllowedProducts.getProductByName("DUST")), 0);
 
-        //Register the machine recipes
-        machineRecipes.registerAllMachineRecipes();
-    }
+	@SubscribeEvent
+	public void registerRecipes(RegistryEvent<IRecipe> evt)
+	{
+		GameRegistry.addSmelting(MaterialRegistry.getMaterialFromName("Dilithium").getProduct(AllowedProducts.getProductByName("ORE")), MaterialRegistry.getMaterialFromName("Dilithium").getProduct(AllowedProducts.getProductByName("DUST")), 0);
+
+		//Register the machine recipes
+		machineRecipes.registerAllMachineRecipes();
+	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event)
@@ -947,7 +954,7 @@ public class AdvancedRocketry {
 
 		String[] biomeBlackList = config.getStringList("BlacklistedBiomes", "Planet", new String[] {Biomes.RIVER.getRegistryName().toString(), Biomes.SKY.getRegistryName().toString(), Biomes.HELL.getRegistryName().toString(), Biomes.VOID.getRegistryName().toString(), AdvancedRocketryBiomes.alienForest.getRegistryName().toString()}, "List of Biomes to be blacklisted from spawning as BiomeIds, default is: river, sky, hell, void, alienForest");
 		String[] biomeHighPressure = config.getStringList("HighPressureBiomes", "Planet", new String[] { AdvancedRocketryBiomes.swampDeepBiome.getRegistryName().toString(), AdvancedRocketryBiomes.stormLandsBiome.getRegistryName().toString() }, "Biomes that only spawn on worlds with pressures over 125, will override blacklist.  Defaults: StormLands, DeepSwamp");
-		String[] biomeSingle = config.getStringList("SingleBiomes", "Planet", new String[] { AdvancedRocketryBiomes.volcanicBarren.getRegistryName().toString(), AdvancedRocketryBiomes.swampDeepBiome.getRegistryName().toString(), AdvancedRocketryBiomes.crystalChasms.getRegistryName().toString(),  AdvancedRocketryBiomes.alienForest.getRegistryName().toString(), Biomes.DESERT_HILLS.getRegistryName().toString(), 
+		String[] biomeSingle = config.getStringList("SingleBiomes", "Planet", new String[] { AdvancedRocketryBiomes.volcanicBarren.getRegistryName().toString(), AdvancedRocketryBiomes.swampDeepBiome.getRegistryName().toString(), AdvancedRocketryBiomes.crystalChasms.getRegistryName().toString(),  AdvancedRocketryBiomes.alienForest.getRegistryName().toString(), Biomes.DESERT_HILLS.getRegistryName().toString(),
 				Biomes.MUSHROOM_ISLAND.getRegistryName().toString(), Biomes.EXTREME_HILLS.getRegistryName().toString(), Biomes.ICE_PLAINS.getRegistryName().toString() }, "Some worlds have a chance of spawning single biomes contained in this list.  Defaults: deepSwamp, crystalChasms, alienForest, desert hills, mushroom island, extreme hills, ice plains");
 
 		config.save();
@@ -1013,7 +1020,7 @@ public class AdvancedRocketry {
 		list.add(new BlockMeta(AdvancedRocketryBlocks.blockLoader, 0));
 		list.add(new BlockMeta(AdvancedRocketryBlocks.blockLoader, 8));
 		TileMultiBlock.addMapping('D', list);
-		
+
 		machineRecipes.createAutoGennedRecipes(modProducts);
 	}
 
@@ -1055,7 +1062,7 @@ public class AdvancedRocketry {
 		((ItemProjector)LibVulpesItems.itemHoloProjector).registerMachine(new TileSpaceElevator(), (BlockTile)AdvancedRocketryBlocks.blockSpaceElevatorController);
 		//Config-controlled machines
 		if(ARConfiguration.getCurrentConfig().enableTerraforming)
-		    ((ItemProjector)LibVulpesItems.itemHoloProjector).registerMachine(new TileAtmosphereTerraformer(), (BlockTile)AdvancedRocketryBlocks.blockAtmosphereTerraformer);
+			((ItemProjector)LibVulpesItems.itemHoloProjector).registerMachine(new TileAtmosphereTerraformer(), (BlockTile)AdvancedRocketryBlocks.blockAtmosphereTerraformer);
 		if(zmaster587.advancedRocketry.api.ARConfiguration.getCurrentConfig().enableGravityController)
 			((ItemProjector)LibVulpesItems.itemHoloProjector).registerMachine(new TileAreaGravityController(), (BlockTile)AdvancedRocketryBlocks.blockGravityMachine);
 		if(zmaster587.advancedRocketry.api.ARConfiguration.getCurrentConfig().enableLaserDrill)
@@ -1097,7 +1104,7 @@ public class AdvancedRocketry {
 
 		ForgeChunkManager.setForcedChunkLoadingCallback(instance, new WorldEvents());
 
-		
+
 		//Register mixed material's recipes
 		for(MixedMaterial material : MaterialRegistry.getMixedMaterialList()) {
 			RecipesMachine.getInstance().addRecipe(material.getMachine(), material.getProducts(), 100, 10, material.getInput());
@@ -1131,10 +1138,10 @@ public class AdvancedRocketry {
 		//Regenerate Chemical Reactor armor recipes
 		TileChemicalReactor.reloadRecipesSpecial();
 
-		
+
 		//Open ore files
 
-		
+
 		//Load Asteroids from XML
 		File file = new File("./config/" + zmaster587.advancedRocketry.api.ARConfiguration.configFolder + "/asteroidConfig.xml");
 		logger.info("Checking for asteroid config at " + file.getAbsolutePath());
@@ -1182,7 +1189,7 @@ public class AdvancedRocketry {
 		}
 		// End load asteroids from XML
 
-		
+
 		file = new File("./config/" + zmaster587.advancedRocketry.api.ARConfiguration.configFolder + "/oreConfig.xml");
 		logger.info("Checking for ore config at " + file.getAbsolutePath());
 		if(!file.exists()) {

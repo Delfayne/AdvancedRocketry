@@ -322,7 +322,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public Profiler getProfiler() {
-		return Minecraft.getMinecraft().mcProfiler;
+		return Minecraft.getMinecraft().profiler;
 	}
 
 	@Override

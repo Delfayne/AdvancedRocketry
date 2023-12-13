@@ -58,9 +58,9 @@ public class BlockSeat extends Block {
 	
 	//If the block is destroyed remove any mounting associated with it
 	@Override
-	public void onBlockDestroyedByExplosion(World world, BlockPos pos,
+	public void onExplosionDestroy(World world, BlockPos pos,
 			Explosion explosionIn) {
-		super.onBlockDestroyedByExplosion(world, pos, explosionIn);
+		super.onExplosionDestroy(world, pos, explosionIn);
 		
 		List<EntityDummy> list = world.getEntitiesWithinAABB(EntityDummy.class, new AxisAlignedBB(pos, pos.add(1,1,1)));
 

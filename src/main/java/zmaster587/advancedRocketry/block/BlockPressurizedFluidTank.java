@@ -39,7 +39,7 @@ public class BlockPressurizedFluidTank extends Block {
 	
 	public BlockPressurizedFluidTank(Material material) {
 		super(material);
-		isBlockContainer = true;
+		hasTileEntity = true;
 	}
 
 	@Override
@@ -114,7 +114,7 @@ public class BlockPressurizedFluidTank extends Block {
 	public boolean shouldSideBeRendered(IBlockState blockState,
 			IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
 		
-		if(side.getFrontOffsetY() != 0) {
+		if(side.getYOffset() != 0) {
 			if(blockAccess.getBlockState(pos).getBlock() == this)
 			return true;
 		}
@@ -144,7 +144,7 @@ public class BlockPressurizedFluidTank extends Block {
 	
 	@Override
 	@Nonnull
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 	

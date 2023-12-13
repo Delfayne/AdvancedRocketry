@@ -171,7 +171,7 @@ public class AdvancedRocketry {
 	private static final CreativeTabs tabAdvRocketry = new CreativeTabs("advancedRocketry") {
 		@Override
 		@Nonnull
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(AdvancedRocketryItems.itemSatelliteIdChip);
 		}
 	};

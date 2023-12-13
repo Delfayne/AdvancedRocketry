@@ -302,7 +302,7 @@ public class TileRailgun extends TileMultiPowerConsumer implements IInventory, I
 		if(state == RedstoneState.OFF)
 			return true;
 
-		boolean powered = world.isBlockIndirectlyGettingPowered(pos) > 0;
+		boolean powered = world.getRedstonePowerFromNeighbors(pos) > 0;
 
 		return (state == RedstoneState.ON && powered) || (!powered && state == RedstoneState.INVERTED);
 	}
@@ -354,9 +354,9 @@ public class TileRailgun extends TileMultiPowerConsumer implements IInventory, I
 
 						EnumFacing dir = RotatableBlock.getFront(world.getBlockState(pos));
 
-						EntityItemAbducted ent = new EntityItemAbducted(this.world, this.pos.getX() - 2*dir.getFrontOffsetX() + 0.5f, this.pos.getY() + 5, this.pos.getZ() - 2*dir.getFrontOffsetZ() + 0.5f, tfrStack);
+						EntityItemAbducted ent = new EntityItemAbducted(this.world, this.pos.getX() - 2*dir.getXOffset() + 0.5f, this.pos.getY() + 5, this.pos.getZ() - 2*dir.getZOffset() + 0.5f, tfrStack);
 						this.world.spawnEntity(ent);
-						PacketHandler.sendToNearby(new PacketMachine(this, (byte) 3), this.world.provider.getDimension(), this.pos.getX() - dir.getFrontOffsetX(), this.pos.getY() + 5, this.pos.getZ() - dir.getFrontOffsetZ(),  64d);
+						PacketHandler.sendToNearby(new PacketMachine(this, (byte) 3), this.world.provider.getDimension(), this.pos.getX() - dir.getXOffset(), this.pos.getY() + 5, this.pos.getZ() - dir.getZOffset(),  64d);
 						return true;
 					}
 				}

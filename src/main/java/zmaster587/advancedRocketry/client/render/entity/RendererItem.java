@@ -28,7 +28,6 @@ public class RendererItem extends Render<EntityItemAbducted> implements IRenderF
     /** Defines the zLevel of rendering of item on GUI. */
     public float zLevel;
     public static boolean renderInFrame;
-    private static final String __OBFID = "CL_00001003";
     RenderEntityItem itemRenderer;
 
     public RendererItem(RenderManager renderManagerIn, RenderItem p_i46167_2_) {

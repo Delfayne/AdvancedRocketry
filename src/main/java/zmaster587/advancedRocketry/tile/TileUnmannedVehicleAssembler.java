@@ -49,7 +49,7 @@ public class TileUnmannedVehicleAssembler extends TileRocketAssemblingMachine {
 		yMax = ZUtils.getContinuousBlockLength(world, EnumFacing.UP, getPos().add(0,1,0), MAX_SIZE_Y, AdvancedRocketryBlocks.blockStructureTower);
 
 		//Get min and maximum Z/X bounds
-		if(direction.getFrontOffsetX() != 0) {
+		if(direction.getXOffset() != 0) {
 			xSize = ZUtils.getContinuousBlockLength(world, direction, pos2.add(0, yMax, 0), MAX_SIZE, AdvancedRocketryBlocks.blockStructureTower);
 			zMin = ZUtils.getContinuousBlockLength(world, EnumFacing.NORTH, pos2.add(0, 0, -1), MAX_SIZE, AdvancedRocketryBlocks.blockStructureTower) + 1;
 			zMax = ZUtils.getContinuousBlockLength(world, EnumFacing.SOUTH, pos2.add(0, 0, 1), MAX_SIZE - zMin, AdvancedRocketryBlocks.blockStructureTower);
@@ -58,12 +58,12 @@ public class TileUnmannedVehicleAssembler extends TileRocketAssemblingMachine {
 			zMin = zCurrent - zMin +1;
 			zMax = zCurrent + zMax;
 
-			if(direction.getFrontOffsetX() > 0) {
+			if(direction.getXOffset() > 0) {
 				xMax = xCurrent + xSize - 1;
 				xMin++;
 			}
 
-			if(direction.getFrontOffsetX() < 0) {
+			if(direction.getXOffset() < 0) {
 				xMin = xCurrent - xSize+1;
 				xMax--;
 			}
@@ -78,12 +78,12 @@ public class TileUnmannedVehicleAssembler extends TileRocketAssemblingMachine {
 			xMax = xCurrent + xMax;
 
 
-			if(direction.getFrontOffsetZ() > 0) {
+			if(direction.getZOffset() > 0) {
 				zMax = zCurrent + zSize - 1;
 				zMin++;
 			}
 
-			if(direction.getFrontOffsetZ() < 0) {
+			if(direction.getZOffset() < 0) {
 				zMin = zCurrent - zSize+1;
 				zMax --;
 			}

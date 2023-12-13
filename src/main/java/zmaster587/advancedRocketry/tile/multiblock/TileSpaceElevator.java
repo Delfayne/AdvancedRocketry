@@ -243,12 +243,12 @@ public class TileSpaceElevator extends TileMultiPowerConsumer implements IModula
 
 	public double getLandingLocationX() {
 		EnumFacing facing = RotatableBlock.getFront(world.getBlockState(getPos()));
-		return getPos().getX() + facing.getFrontOffsetX()*-5 - facing.getFrontOffsetZ()*2 + 0.5;
+		return getPos().getX() + facing.getXOffset()*-5 - facing.getZOffset()*2 + 0.5;
 	}
 
 	public double getLandingLocationZ() {
 		EnumFacing facing = RotatableBlock.getFront(world.getBlockState(getPos()));
-		return getPos().getZ() + facing.getFrontOffsetX()*2 + facing.getFrontOffsetZ()*-5 + 0.5;
+		return getPos().getZ() + facing.getXOffset()*2 + facing.getZOffset()*-5 + 0.5;
 	}
 
 

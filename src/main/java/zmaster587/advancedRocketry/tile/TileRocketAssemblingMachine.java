@@ -487,8 +487,8 @@ public class TileRocketAssemblingMachine extends TileEntityRFConsumer implements
 		EnumFacing direction = RotatableBlock.getFront(world.getBlockState(pos)).getOpposite();
 		int xMin, zMin, xMax, zMax;
 		int yCurrent = pos.getY() -1;
-		int xCurrent = pos.getX() + direction.getFrontOffsetX();
-		int zCurrent = pos.getZ() + direction.getFrontOffsetZ();
+		int xCurrent = pos.getX() + direction.getXOffset();
+		int zCurrent = pos.getZ() + direction.getZOffset();
 		xMax = xMin = xCurrent;
 		zMax = zMin = zCurrent;
 		int xSize, zSize;
@@ -499,7 +499,7 @@ public class TileRocketAssemblingMachine extends TileEntityRFConsumer implements
 			return null;
 
 		//Get min and maximum Z/X bounds
-		if(direction.getFrontOffsetX() != 0) {
+		if(direction.getXOffset() != 0) {
 			xSize = ZUtils.getContinuousBlockLength(world, direction, currPos, MAX_SIZE, viableBlocks);
 			zMin = ZUtils.getContinuousBlockLength(world, EnumFacing.NORTH, currPos, MAX_SIZE, viableBlocks);
 			zMax = ZUtils.getContinuousBlockLength(world, EnumFacing.SOUTH, currPos.add(0,0,1), MAX_SIZE - zMin, viableBlocks);
@@ -508,11 +508,11 @@ public class TileRocketAssemblingMachine extends TileEntityRFConsumer implements
 			zMin = zCurrent - zMin + 1;
 			zMax = zCurrent + zMax;
 
-			if(direction.getFrontOffsetX() > 0) {
+			if(direction.getXOffset() > 0) {
 				xMax = xCurrent + xSize-1;
 			}
 
-			if(direction.getFrontOffsetX() < 0) {
+			if(direction.getXOffset() < 0) {
 				xMin = xCurrent - xSize+1;
 			}
 		}
@@ -525,11 +525,11 @@ public class TileRocketAssemblingMachine extends TileEntityRFConsumer implements
 			xMin = xCurrent - xMin + 1;
 			xMax = xCurrent + xMax;
 
-			if(direction.getFrontOffsetZ() > 0) {
+			if(direction.getZOffset() > 0) {
 				zMax = zCurrent + zSize-1;
 			}
 
-			if(direction.getFrontOffsetZ() < 0) {
+			if(direction.getZOffset() < 0) {
 				zMin = zCurrent - zSize+1;
 			}
 		}

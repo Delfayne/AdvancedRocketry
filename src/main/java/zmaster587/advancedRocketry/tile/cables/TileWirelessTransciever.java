@@ -290,7 +290,7 @@ public class TileWirelessTransciever extends TileEntity implements INetworkMachi
 			if (state.getBlock() instanceof RotatableBlock) {
 				EnumFacing facing = RotatableBlock.getFront(state).getOpposite();
 
-				TileEntity tile = world.getTileEntity(getPos().add(facing.getFrontOffsetX(),facing.getFrontOffsetY(),facing.getFrontOffsetZ()));
+				TileEntity tile = world.getTileEntity(getPos().add(facing.getXOffset(),facing.getYOffset(),facing.getZOffset()));
 
 				if( tile instanceof IDataHandler && !(tile instanceof TileWirelessTransciever))
 				{

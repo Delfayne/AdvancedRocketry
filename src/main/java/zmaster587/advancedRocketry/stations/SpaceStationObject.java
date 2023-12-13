@@ -646,11 +646,11 @@ public class SpaceStationObject implements ISpaceObject, IPlanetDefiner {
 					}
 				}
 				else if(cross.getOpposite() != moduleFacing)
-					chunk.rotateBy(stationFacing.getFrontOffsetY() == 0 ? cross : cross.getOpposite());
+					chunk.rotateBy(stationFacing.getYOffset() == 0 ? cross : cross.getOpposite());
 
-				int xCoord = (stationFacing.getFrontOffsetX() == 0 ? -srcTile.getPos().getX() : srcTile.getPos().getX()*stationFacing.getFrontOffsetX()) + stationFacing.getFrontOffsetX() + destTile.getPos().getX();
-				int yCoord = (stationFacing.getFrontOffsetY() == 0 ? -srcTile.getPos().getY() : srcTile.getPos().getY()*stationFacing.getFrontOffsetY()) + stationFacing.getFrontOffsetY() + destTile.getPos().getY();
-				int zCoord = (stationFacing.getFrontOffsetZ() == 0 ? -srcTile.getPos().getZ() : srcTile.getPos().getZ()*stationFacing.getFrontOffsetZ()) + stationFacing.getFrontOffsetZ() + destTile.getPos().getZ();
+				int xCoord = (stationFacing.getXOffset() == 0 ? -srcTile.getPos().getX() : srcTile.getPos().getX()*stationFacing.getXOffset()) + stationFacing.getXOffset() + destTile.getPos().getX();
+				int yCoord = (stationFacing.getYOffset() == 0 ? -srcTile.getPos().getY() : srcTile.getPos().getY()*stationFacing.getYOffset()) + stationFacing.getYOffset() + destTile.getPos().getY();
+				int zCoord = (stationFacing.getZOffset() == 0 ? -srcTile.getPos().getZ() : srcTile.getPos().getZ()*stationFacing.getZOffset()) + stationFacing.getZOffset() + destTile.getPos().getZ();
 				chunk.pasteInWorld(worldObj, xCoord, yCoord, zCoord);
 				worldObj.setBlockToAir(destTile.getPos().offset(stationFacing));
 				worldObj.setBlockToAir(destTile.getPos());

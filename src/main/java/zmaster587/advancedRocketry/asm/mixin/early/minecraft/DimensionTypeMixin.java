@@ -1,4 +1,4 @@
-package zmaster587.advancedRocketry.mixin.forge;
+package zmaster587.advancedRocketry.asm.mixin.early.minecraft;
 
 import net.minecraft.world.DimensionType;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,6 +36,6 @@ public abstract class DimensionTypeMixin {
     }
 
     @Shadow
-    abstract int getId();
+    public abstract int getId();
 
 }

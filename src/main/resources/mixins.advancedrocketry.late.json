@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "zmaster587.advancedRocketry.mixin",
+  "refmap": "mixins.advancedrocketry.refmap.json",
+  "plugin": "zmaster587.advancedRocketry.mixin.core.MixinConfigPlugin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

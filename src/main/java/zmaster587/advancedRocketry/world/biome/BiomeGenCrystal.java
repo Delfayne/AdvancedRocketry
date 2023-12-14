@@ -23,8 +23,6 @@ public class BiomeGenCrystal extends Biome  {
 		
 		topBlock = Blocks.SNOW.getDefaultState();
 		fillerBlock = Blocks.PACKED_ICE.getDefaultState();
-		this.spawnableMonsterList.clear();
-		this.spawnableCreatureList.clear();
 		this.decorator.generateFalls=false;
 		this.decorator.flowersPerChunk=0;
 		this.decorator.grassPerChunk=0;
@@ -33,6 +31,10 @@ public class BiomeGenCrystal extends Biome  {
 		
 		crystalGenerator = new WorldGenLargeCrystal();
 		crystalGenBase = new MapGenLargeCrystal(fillerBlock, AdvancedRocketryBlocks.blockCrystal.getDefaultState());
+	}
+	@Override
+	public float getSpawningChance() {
+		return 0f; //Nothing spawns
 	}
 	
 	@Override
